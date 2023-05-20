@@ -1,5 +1,5 @@
 export const colorTokens = {
-    grey: {
+    gray: {
         0: "#FFFFFF",
         10: "#F6F6F6",
         50: "#F0F0F0",
