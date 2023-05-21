@@ -4,6 +4,7 @@ import User from "../models/User.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
+    console.log('auth/register')
     try {
         const {
             firstName,
@@ -42,15 +43,17 @@ export const register = async (req, res) => {
 
 /* LOGGIN IN */
 export const login = async (req, res) => {
+    console.log('auth/login')
     try {
         const { email, password } = req.body;
+        console.log(req.body)
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ msg: "User does not exist." });
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) res.status(400).json({ msg: "Invalid credentials." });
 
-        const token = jwt.sign({ id: user_id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         delete user.password;
         res.status(200).json({ token, user });
 

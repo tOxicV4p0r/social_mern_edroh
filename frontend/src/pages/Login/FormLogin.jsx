@@ -97,7 +97,7 @@ const FormLogin = () => {
 
     const handleFormSubmit = async (values, event) => {
         console.log(values);
-        if (isLogin) return await login();
+        if (isLogin) return await login(values,event);
 
         if (isRegister) return await register(values, event);
     }

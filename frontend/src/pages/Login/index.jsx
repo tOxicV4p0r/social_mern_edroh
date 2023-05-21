@@ -1,5 +1,4 @@
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import FormLoginTest from "./FormLoginTest";
 import FormLogin from "./FormLogin";
 
 const Login = () => {
@@ -11,6 +10,8 @@ const Login = () => {
             <Box
                 width="100%"
                 backgroundColor={theme.palette.background.alt}
+                p="1rem 6%"
+                textAlign="center"
             >
                 <Typography
                     fontWeight="bold"

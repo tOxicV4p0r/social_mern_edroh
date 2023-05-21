@@ -1,6 +1,8 @@
+import Nav from "pages/Nav";
+
 const Home = () => {
     return (
-        <div>Homepage</div>
+        <Nav />
     )
 }
 
