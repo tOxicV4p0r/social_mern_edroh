@@ -21,7 +21,7 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={isAuth ? <Home user={user} /> : <Navigate to="/" />} />
+            <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/" />} />
             {/* <Route path="/home" element={isAuth ? <Home /> : <Login />} /> */}
             <Route path="/profile/:userId" element={isAuth ? <Profile /> : <Navigate to="/" />} />
           </Routes>
