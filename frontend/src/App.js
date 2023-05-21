@@ -6,11 +6,9 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Home from 'pages/Home';
 import Login from 'pages/Login';
 import Profile from 'pages/Profile';
-import Nav from 'pages/Nav';
 
 function App() {
   const mode = useSelector((state) => state.mode);
-  const user = useSelector((state) => state.user);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector((state) => state.token));
 

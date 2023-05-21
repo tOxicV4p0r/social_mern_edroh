@@ -147,7 +147,7 @@ const MypostWidget = () => {
                     sx={{
                         color: palette.background.alt,
                         backgroundColor: palette.primary.main,
-                        borderRadius: "3rem"
+                        borderRadius: "3rem",
                     }}
                 >
                     POST

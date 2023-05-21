@@ -17,8 +17,6 @@ const FriendListWidget = ({ userId }) => {
     const main = palette.primary.main;
     const medium = palette.primary.medium;
 
-    // const isFriend = friends.find((friend) => friend._id === userId);
-
     return (
         <WidgetWrapper>
             <Typography
@@ -34,6 +32,7 @@ const FriendListWidget = ({ userId }) => {
                     //friends.map((friends) => no destructure
                     friends.map(({ _id, firstName, lastName, location, picturePath }) => (
                         <Friend
+                            key={_id}
                             friendId={_id}
                             name={`${firstName} ${lastName}`}
                             subtitle={location}

@@ -7,36 +7,19 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Widgets = ({ userId, picturePath }) => {
-    // const [user, setUser] = useState(null);
+const UserWidget = ({ userId, picturePath, isCurrentUser = true }) => {
     const { palette } = useTheme();
     const navigate = useNavigate();
     const token = useSelector((state) => state.token);
     const user = useSelector((state) => state.user);
+    const profile = useSelector((state) => state.profile);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
-    /*
-    const getUser = async () => {
-        const res = await fetch(`http://localhost:3001/user/${userId}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+    let currentProfile = isCurrentUser ? user : profile;
 
-        const data = await res.json();
-        setUser(data);
-    };
-
-    useEffect(() => {
-        getUser();
-    }, []);
-
-    */
-
-    if (!user) {
+    if (!currentProfile) {
         return null;
     }
 
@@ -48,7 +31,7 @@ const Widgets = ({ userId, picturePath }) => {
         viewedProfile,
         impressions,
         friends = []
-    } = user;
+    } = currentProfile;
 
     return (
         <WidgetWrapper>
@@ -136,4 +119,4 @@ const Widgets = ({ userId, picturePath }) => {
     )
 }
 
-export default Widgets;
+export default UserWidget;
