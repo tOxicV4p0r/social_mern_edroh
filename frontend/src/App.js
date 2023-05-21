@@ -10,6 +10,7 @@ import Nav from 'pages/Nav';
 
 function App() {
   const mode = useSelector((state) => state.mode);
+  const user = useSelector((state) => state.user);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector((state) => state.token));
 
@@ -20,7 +21,7 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/" />} />
+            <Route path="/home" element={isAuth ? <Home user={user} /> : <Navigate to="/" />} />
             {/* <Route path="/home" element={isAuth ? <Home /> : <Login />} /> */}
             <Route path="/profile/:userId" element={isAuth ? <Profile /> : <Navigate to="/" />} />
           </Routes>

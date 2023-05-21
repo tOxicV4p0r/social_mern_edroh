@@ -1,8 +1,12 @@
 import Nav from "pages/Nav";
+import Widgets from "pages/Widgets";
 
-const Home = () => {
+const Home = ({ user }) => {
     return (
-        <Nav />
+        <>
+            <Nav />
+            <Widgets userId={user._id} picturePath={user.picturePath} />
+        </>
     )
 }
 
