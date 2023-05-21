@@ -4,6 +4,8 @@ import Nav from "pages/Nav";
 import UserWidget from "pages/Widgets/UserWidget";
 import MypostWidget from "pages/Widgets/MypostWidget";
 import PostsWidget from "pages/Widgets/PostsWidget";
+import AdWidget from "pages/Widgets/AdWidget";
+import FriendListWidget from "pages/Widgets/FriendListWidget";
 
 const Home = () => {
     const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
@@ -32,7 +34,10 @@ const Home = () => {
                 {
                     isNonMobileScreen ?
                         <Box flexBasis={isNonMobileScreen ? "26%" : undefined}>
-                            friend suggestion
+                            <AdWidget />
+                            <Box m="2rem 0">
+                                <FriendListWidget userId={_id} />
+                            </Box>
                         </Box>
                         : null
                 }

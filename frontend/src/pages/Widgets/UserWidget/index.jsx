@@ -8,14 +8,16 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Widgets = ({ userId, picturePath }) => {
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
     const token = useSelector((state) => state.token);
+    const user = useSelector((state) => state.user);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
+    /*
     const getUser = async () => {
         const res = await fetch(`http://localhost:3001/user/${userId}`, {
             method: "GET",
@@ -31,6 +33,8 @@ const Widgets = ({ userId, picturePath }) => {
     useEffect(() => {
         getUser();
     }, []);
+
+    */
 
     if (!user) {
         return null;

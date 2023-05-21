@@ -54,8 +54,20 @@ export const login = async (req, res) => {
         if (!isMatch) res.status(400).json({ msg: "Invalid credentials." });
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        delete user.password;
-        res.status(200).json({ token, user });
+
+        const friends = await Promise.all(
+            user.friends.map((id) => User.findById(id))
+        )
+
+        const formattedFriends = friends.map(
+            ({
+                _id, firstName, lastName, occupation, location, picturePath
+            }) => {
+                return { _id, firstName, lastName, occupation, location, picturePath };
+            });
+
+        delete user._doc.password;
+        res.status(200).json({ token, user: { ...user._doc, friends: formattedFriends } });
 
     } catch (err) {
         res.status(500).json({ error: err.message });
