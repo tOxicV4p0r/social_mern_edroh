@@ -10,17 +10,19 @@ import { useNavigate } from "react-router-dom";
 const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
     const { palette } = useTheme();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.profile);
     const profile = useSelector((state) => state.profile);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
-    let currentProfile = isCurrentUser ? user : profile;
+    // let currentProfile = isCurrentUser ? user : profile;
 
-    console.log(isCurrentUser);
+    useEffect(() => {
 
-    if (!currentProfile) {
+    }, [profile]);
+
+    if (!user) {
         return null;
     }
 
@@ -32,7 +34,7 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
         viewedProfile,
         impressions,
         friends = []
-    } = currentProfile;
+    } = user;
 
     return (
         <WidgetWrapper>
@@ -58,7 +60,7 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
                                 }
                             }}
                         >
-                            {firstName} {lastName}
+                            {user.firstName} {user.lastName}
                         </Typography>
                         <Typography color={medium} >{friends.length} friends</Typography>
                     </Box>

@@ -5,7 +5,19 @@ export const getUser = async (req, res) => {
         const { id } = req.params;
         const user = await User.findById(id);
 
+        const friends = await Promise.all(
+            user.friends.map((id) => User.findById(id))
+        )
+
+        const formattedFriends = friends.map(
+            ({
+                _id, firstName, lastName, occupation, location, picturePath
+            }) => {
+                return { _id, firstName, lastName, occupation, location, picturePath };
+            });
+
         delete user._doc.password;
+        user._doc.friends = formattedFriends;
         res.status(200).json(user);
 
     } catch (err) {

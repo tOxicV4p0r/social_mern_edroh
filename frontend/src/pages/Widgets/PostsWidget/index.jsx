@@ -34,7 +34,7 @@ const PostsWidget = ({ userId, isProfile }) => {
         } else {
             getPosts();
         }
-    }, []);
+    }, [userId]);
 
     return (
         <>

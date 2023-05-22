@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setFriends } from "state";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
@@ -15,7 +15,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
-    const primaryDark = palette.primary.dark;
     const main = palette.primary.main;
     const medium = palette.primary.medium;
 
@@ -38,15 +37,13 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         <FlexBetween>
             <FlexBetween gap="1rem">
                 <UserImage image={userPicturePath} size="55px" />
+
                 <Box
-                    onClick={() => {
-                        navigate(`/profile/${friendId}`)
-                        // navigate(0);
-                    }}
+                    onClick={() => { navigate(`/profile/${friendId}`) }}
                 >
                     <Typography
                         color={main}
-                        variant="h5"
+                        variant="h6"
                         fontWeight="500"
                         sx={{
                             "&:hover": {
@@ -70,7 +67,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             >
                 {isFriend ? <PersonRemoveOutlined /> : <PersonAddOutlined />}
             </IconButton>
-        </FlexBetween>
+        </FlexBetween >
     )
 };
 

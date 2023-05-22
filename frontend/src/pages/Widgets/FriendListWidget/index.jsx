@@ -9,13 +9,17 @@ import { setFriends } from "state";
 const FriendListWidget = ({ userId }) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
+    const user = useSelector((state) => state.user);
     const friends = useSelector((state) => state.user.friends);
+    // const profileFriends = useSelector((state) => state.profile.friends);
 
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
     const primaryDark = palette.primary.dark;
     const main = palette.primary.main;
     const medium = palette.primary.medium;
+
+    // const friends = user._id === userId ? currentUserfriends : profileFriends;
 
     return (
         <WidgetWrapper>
