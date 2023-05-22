@@ -83,8 +83,6 @@ const FormLogin = () => {
         }
 
         formData.append('picturePath', values.picture.name);
-        for (let [key, value] of formData)
-            console.log(key, value);
 
         const savedUserResponse = await fetch("http://localhost:3001/auth/register", { method: "POST", body: formData });
         const savedUser = await savedUserResponse.json();
@@ -96,7 +94,6 @@ const FormLogin = () => {
     }
 
     const handleFormSubmit = async (values, event) => {
-        console.log(values);
         if (isLogin) return await login(values,event);
 
         if (isRegister) return await register(values, event);

@@ -4,6 +4,7 @@ export const colorTokens = {
         10: "#F6F6F6",
         50: "#F0F0F0",
         100: "#E0E0E0",
+        150: "#c2c2c2a1",
         200: "#C2C2C2",
         300: "#A3A3A3",
         400: "#858585",
@@ -45,6 +46,7 @@ export const themeSettings = (mode) => {
                 main: colorTokens.gray[200],
                 mediumMain: colorTokens.gray[300],
                 medium: colorTokens.gray[400],
+                lightMedium: colorTokens.gray[600],
                 light: colorTokens.gray[700],
             },
             background: {
@@ -64,6 +66,7 @@ export const themeSettings = (mode) => {
                 main: colorTokens.gray[500],
                 mediumMain: colorTokens.gray[400],
                 medium: colorTokens.gray[300],
+                lightMedium: colorTokens.gray[150],
                 light: colorTokens.gray[50],
             },
             background: {

@@ -26,7 +26,6 @@ const Profile = () => {
 
         const data = await res.json();
         setUser(data)
-        console.log(data)
         dispatch(setProfile({ profile: data }));
     }
 

@@ -1,12 +1,11 @@
 import { DarkMode, Help, LightMode, Message, Notifications } from "@mui/icons-material";
 import { FormControl, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setLogout, setMode } from "state";
 
 const NavMenu = ({ fullName, theme, neutralLight, dark }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const lightMedium = theme.palette.neutral.lightMedium;
 
     return (
         <>
@@ -19,9 +18,9 @@ const NavMenu = ({ fullName, theme, neutralLight, dark }) => {
                     )
                 }
             </IconButton>
-            <Message sm={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
-            <Help sx={{ fontSize: "25px" }} />
+            <Message sx={{ fontSize: "25px", color: lightMedium }} />
+            <Notifications sx={{ fontSize: "25px", color: lightMedium }} />
+            <Help sx={{ fontSize: "25px", color: lightMedium }} />
             <FormControl variant="standard" value={fullName} >
                 <Select
                     value={fullName}

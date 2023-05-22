@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
-import { Box, Button, Divider, IconButton, InputBase, Typography, useMediaQuery, useTheme } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import Dropzone from "react-dropzone";
+import { Box, Button, Divider, IconButton, InputBase, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { AttachFileOutlined, DeleteOutlined, EditOutlined, GifBoxOutlined, ImageOutlined, MicOutlined, MoreHorizOutlined } from "@mui/icons-material";
 
 const MypostWidget = () => {
@@ -19,6 +19,7 @@ const MypostWidget = () => {
     const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
+    const lightMedium = palette.neutral.lightMedium;
     const light = palette.neutral.light;
 
     const handlePost = async () => {
@@ -27,7 +28,7 @@ const MypostWidget = () => {
         formData.append("description", post);
         if (image) {
             formData.append("picture", image);
-            formData.append("picturePatch", image.name);
+            formData.append("picturePath", image.name);
         }
 
         const res = await fetch('http://localhost:3001/posts', {
@@ -120,17 +121,17 @@ const MypostWidget = () => {
                 {
                     isNonMobileScreen ?
                         <>
-                            <FlexBetween gap="0.25rem" sx={{ color: mediumMain }}>
+                            <FlexBetween gap="0.25rem" sx={{ color: lightMedium }}>
                                 <GifBoxOutlined />
                                 <Typography>Clip</Typography>
                             </FlexBetween>
 
-                            <FlexBetween gap="0.25rem" sx={{ color: mediumMain }}>
+                            <FlexBetween gap="0.25rem" sx={{ color: lightMedium }}>
                                 <AttachFileOutlined />
                                 <Typography>Attachment</Typography>
                             </FlexBetween>
 
-                            <FlexBetween gap="0.25rem" sx={{ color: mediumMain }}>
+                            <FlexBetween gap="0.25rem" sx={{ color: lightMedium }}>
                                 <MicOutlined />
                                 <Typography>Audio</Typography>
                             </FlexBetween>

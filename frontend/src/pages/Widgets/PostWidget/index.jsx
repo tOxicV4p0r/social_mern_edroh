@@ -7,6 +7,7 @@ import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, Sh
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import Friend from "components/Friend";
 import FlexBetween from "components/FlexBetween";
+import { FormattedDate, FormattedRelativeTime, IntlProvider } from "react-intl";
 
 const PostWidget = ({
     postId,
@@ -17,7 +18,8 @@ const PostWidget = ({
     picturePath,
     userPicturePath,
     likes,
-    comments
+    comments,
+    createdAt
 }) => {
     const [isComments, setIsComments] = useState(false);
     const dispatch = useDispatch();
@@ -29,6 +31,8 @@ const PostWidget = ({
     const { palette } = useTheme();
     const primary = palette.primary.main;
     const main = palette.neutral.main;
+    const lightMedium = palette.neutral.lightMedium;
+
 
     const patchLike = async () => {
         const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -52,6 +56,24 @@ const PostWidget = ({
                 userPicturePath={userPicturePath}
             />
             <Typography color={main} sx={{ mt: "1rem" }} >{description}</Typography>
+            <Typography color={main} sx={{ mt: "0.5rem",fontSize:"0.9rem", color: lightMedium }}>
+                <IntlProvider defaultLocale="en" locale="en">
+                    {((Date.now() / 1000) - (new Date(createdAt) / 1000)) > 86400 ?
+                        <FormattedDate
+                            value={new Date(createdAt)}
+                            month="long"
+                            year="numeric"
+                            day="2-digit"
+                        />
+                        :
+                        <FormattedRelativeTime
+                            value={(new Date(createdAt) / 1000) - Date.now() / 1000}
+                            style="narrow"
+                            updateIntervalInSeconds={1}
+                        />
+                    }
+                </IntlProvider>
+            </Typography>
             {
                 picturePath ?
                     <img
@@ -80,7 +102,7 @@ const PostWidget = ({
 
                 </FlexBetween>
                 <IconButton>
-                    <ShareOutlined />
+                    <ShareOutlined sx={{ color: lightMedium }} />
                 </IconButton>
             </FlexBetween>
             {

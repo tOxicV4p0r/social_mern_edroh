@@ -3,26 +3,18 @@ import { Box, Divider, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
+const UserWidget = ({ userId, picturePath }) => {
     const { palette } = useTheme();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
     const profile = useSelector((state) => state.profile);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
+    const lightMedium = palette.neutral.lightMedium;
     const main = palette.neutral.main;
-
-    let currentProfile = isCurrentUser ? user : profile;
-
-    console.log(isCurrentUser);
-
-    if (!currentProfile) {
-        return null;
-    }
 
     const {
         firstName,
@@ -32,7 +24,7 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
         viewedProfile,
         impressions,
         friends = []
-    } = currentProfile;
+    } = user._id == profile._id ? user : profile;;
 
     return (
         <WidgetWrapper>
@@ -40,9 +32,6 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
             <FlexBetween
                 gap="0.5rem"
                 pb="1.1rem"
-                onClick={() => {
-                    navigate(`/profile/${userId}`)
-                }}
             >
                 <FlexBetween gap="1rem">
                     <UserImage image={picturePath} />
@@ -57,13 +46,16 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
                                     cursor: "pointer"
                                 }
                             }}
+                            onClick={() => {
+                                navigate(`/profile/${userId}`)
+                            }}
                         >
                             {firstName} {lastName}
                         </Typography>
                         <Typography color={medium} >{friends.length} friends</Typography>
                     </Box>
                 </FlexBetween>
-                <ManageAccountsOutlined />
+                <ManageAccountsOutlined sx={{ color: lightMedium }} />
             </FlexBetween>
             <Divider />
 
@@ -104,7 +96,7 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
                             <Typography color={medium}>Social Network</Typography>
                         </Box>
                     </FlexBetween>
-                    <EditOutlined sx={{ color: main }} />
+                    <EditOutlined sx={{ color: lightMedium }} />
                 </FlexBetween>
 
                 <FlexBetween gap="1rem">
@@ -115,7 +107,7 @@ const UserWidget = ({ userId, picturePath, isCurrentUser = false }) => {
                             <Typography color={medium}>Network Platform</Typography>
                         </Box>
                     </FlexBetween>
-                    <EditOutlined sx={{ color: main }} />
+                    <EditOutlined sx={{ color: lightMedium }} />
                 </FlexBetween>
             </Box>
         </WidgetWrapper>

@@ -49,7 +49,8 @@ const PostsWidget = ({ userId, isProfile }) => {
                     picturePath,
                     userPicturePath,
                     likes,
-                    comments
+                    comments,
+                    createdAt
                 }) => (
                     <PostWidget
                         key={_id}
@@ -62,9 +63,10 @@ const PostsWidget = ({ userId, isProfile }) => {
                         userPicturePath={userPicturePath}
                         likes={likes}
                         comments={comments}
+                        createdAt={createdAt}
                     />
                 )
-                )
+                ).reverse()
             }
         </>
     )

@@ -1,5 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setProfile } from "state";
 import UserWidget from "pages/Widgets/UserWidget";
 import MypostWidget from "pages/Widgets/MypostWidget";
 import PostsWidget from "pages/Widgets/PostsWidget";
@@ -7,8 +9,14 @@ import AdWidget from "pages/Widgets/AdWidget";
 import FriendListWidget from "pages/Widgets/FriendListWidget";
 
 const Home = () => {
+    const dispatch = useDispatch();
     const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
-    const { _id, picturePath } = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
+    const { _id, picturePath } = user;
+
+    useEffect(() => {
+        dispatch(setProfile({ profile: user }));
+    }, [])
 
     return (
         <Box
@@ -19,7 +27,7 @@ const Home = () => {
             justifyContent="space-between"
         >
             <Box flexBasis={isNonMobileScreen ? "26%" : undefined}>
-                <UserWidget userId={_id} picturePath={picturePath} isCurrentUser />
+                <UserWidget userId={_id} picturePath={picturePath} />
             </Box>
             <Box
                 flexBasis={isNonMobileScreen ? "42%" : undefined}
