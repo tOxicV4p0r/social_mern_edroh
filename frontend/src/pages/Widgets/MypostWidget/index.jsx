@@ -8,16 +8,18 @@ import UserImage from "components/UserImage";
 import Dropzone from "react-dropzone";
 import { Box, Button, Divider, IconButton, InputBase, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { AttachFileOutlined, DeleteOutlined, EditOutlined, GifBoxOutlined, ImageOutlined, MicOutlined, MoreHorizOutlined } from "@mui/icons-material";
+import { LoadingButton } from "@mui/lab";
 
 const MypostWidget = () => {
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
     const [post, setPost] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const { _id, picturePath } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
-    
+
     const { palette } = useTheme();
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
@@ -25,6 +27,7 @@ const MypostWidget = () => {
     const light = palette.neutral.light;
 
     const handlePost = async () => {
+        setIsLoading(true);
         const formData = new FormData();
         formData.append("userId", _id);
         formData.append("description", post);
@@ -37,6 +40,7 @@ const MypostWidget = () => {
         dispatch(setPosts({ posts: postRes }));
         setImage(null);
         setPost("");
+        setIsLoading(false);
     }
 
     return (
@@ -138,18 +142,18 @@ const MypostWidget = () => {
                         </FlexBetween>
                 }
 
-                <Button
+                <LoadingButton
+                    loading={isLoading}
                     disabled={!post}
                     onClick={handlePost}
                     sx={{
+                        p: "0.6rem",
+                        borderRadius: "9999rem",
                         fontWeight: "600",
-                        color: palette.background.altMid,
-                        backgroundColor: palette.primary.light,
-                        borderRadius: "3rem",
                     }}
                 >
                     POST
-                </Button>
+                </LoadingButton>
             </FlexBetween>
         </WidgetWrapper>
     )

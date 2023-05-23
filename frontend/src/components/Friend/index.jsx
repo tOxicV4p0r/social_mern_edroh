@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "store";
@@ -6,6 +7,7 @@ import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const dispatch = useDispatch();
@@ -13,18 +15,21 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const friends = useSelector((state) => state.user.friends);
+    const [isLoading, setLoading] = useState(false);
 
     const { palette } = useTheme();
-    const primaryLight = palette.primary.light;
     const main = palette.primary.main;
     const light = palette.primary.light;
+    const medium = palette.neutral.light;
 
     const isMe = friendId === _id;
     const isFriend = friends.find((friend) => friend._id === friendId);
 
     const handleFriend = async () => {
-        const friendsRes = await patchFriend({ token, userId:_id, friendId });
+        setLoading(true);
+        const friendsRes = await patchFriend({ token, userId: _id, friendId });
         dispatch(setFriends({ friends: friendsRes }))
+        setLoading(false);
     };
 
     return (
@@ -56,12 +61,13 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
                 </Box>
             </FlexBetween>
             {!isMe ?
-                <IconButton
+                <LoadingButton
                     onClick={handleFriend}
-                    sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+                    sx={{ p: "0.6rem", borderRadius: "9999rem" }}
+                    loading={isLoading}
                 >
                     {isFriend ? <PersonRemoveOutlined /> : <PersonAddOutlined />}
-                </IconButton>
+                </LoadingButton>
                 : null
             }
         </FlexBetween >

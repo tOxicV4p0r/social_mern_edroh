@@ -72,7 +72,7 @@ export const themeSettings = (mode) => {
                 main: colorTokens.gray[500],
                 mediumMain: colorTokens.gray[400],
                 medium: colorTokens.gray[300],
-                lightMedium: colorTokens.gray[150],
+                lightMedium: colorTokens.gray[200],
                 light: colorTokens.gray[50],
             },
             background: {
