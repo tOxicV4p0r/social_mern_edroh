@@ -75,7 +75,7 @@ export const patchLike = async ({ token, userId, postId }) => {
 };
 
 export const patchFriend = async ({ token, userId, friendId }) => {
-    const response = await fetch(`${service.baseURL}/${userId}/${friendId}`, {
+    const response = await fetch(`${service.baseURL}/user/${userId}/${friendId}`, {
         method: "PATCH",
         headers: {
             Authorization: `Bearer ${token}`,

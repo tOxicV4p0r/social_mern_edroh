@@ -23,7 +23,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const isFriend = friends.find((friend) => friend._id === friendId);
 
     const handleFriend = async () => {
-        const friendsRes = await patchFriend({ token, _id, friendId });
+        const friendsRes = await patchFriend({ token, userId:_id, friendId });
         dispatch(setFriends({ friends: friendsRes }))
     };
 
