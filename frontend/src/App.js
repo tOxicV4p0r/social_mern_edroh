@@ -14,21 +14,6 @@ function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
-  /* return ( // OLD VERSION
-    <div className="App">
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Routes>
-            <Route path="/" element={isAuth ? <Home /> : <Login />} />
-            <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/" />} />
-            <Route path="/profile/:userId" element={isAuth ? <Profile /> : <Navigate to="/" />} />
-          </Routes>
-        </ThemeProvider>
-      </BrowserRouter>
-    </div>
-  ); */
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>

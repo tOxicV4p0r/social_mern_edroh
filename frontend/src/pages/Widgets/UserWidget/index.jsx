@@ -1,19 +1,21 @@
-import { EditOutlined, LocationOnOutlined, ManageAccountsOutlined, WorkOutlineOutlined } from "@mui/icons-material";
-import { Box, Divider, Typography, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { EditOutlined, LocationOnOutlined, ManageAccountsOutlined, WorkOutlineOutlined } from "@mui/icons-material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 
 const UserWidget = ({ userId, picturePath }) => {
-    const { palette } = useTheme();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
     const profile = useSelector((state) => state.profile);
+
+    const { palette } = useTheme();
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const lightMedium = palette.neutral.lightMedium;
+    const light = palette.primary.light;
     const main = palette.neutral.main;
 
     const {
@@ -42,7 +44,7 @@ const UserWidget = ({ userId, picturePath }) => {
                             fontWeight="500"
                             sx={{
                                 "&:hover": {
-                                    color: palette.primary.light,
+                                    color: light,
                                     cursor: "pointer"
                                 }
                             }}

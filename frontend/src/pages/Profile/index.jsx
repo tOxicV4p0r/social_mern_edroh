@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { setProfile } from "store";
+import { fetchUser } from "services/api";
 import FriendListWidget from "pages/Widgets/FriendListWidget";
 import MypostWidget from "pages/Widgets/MypostWidget";
 import PostsWidget from "pages/Widgets/PostsWidget";
 import UserWidget from "pages/Widgets/UserWidget";
-import { setProfile } from "state";
 import { Box, useMediaQuery } from "@mui/material";
 
 const Profile = () => {
@@ -16,17 +17,9 @@ const Profile = () => {
     const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
 
     const getUser = async () => {
-        const res = await fetch(`http://localhost:3001/user/${userId}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
-
-        const data = await res.json();
-        setUser(data)
-        dispatch(setProfile({ profile: data }));
+        const resUser = await fetchUser({ token, userId });
+        setUser(resUser)
+        dispatch(setProfile({ profile: resUser }));
     }
 
     useEffect(() => {

@@ -1,13 +1,14 @@
-import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
-import WidgetWrapper from "components/WidgetWrapper";
-import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { setPost } from "store";
 import Friend from "components/Friend";
 import FlexBetween from "components/FlexBetween";
+import WidgetWrapper from "components/WidgetWrapper";
 import { FormattedDate, FormattedRelativeTime, IntlProvider } from "react-intl";
+import { patchLike, service } from "services/api";
+import { useTheme } from "@emotion/react";
+import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from "@mui/icons-material";
+import { Box, Divider, IconButton, Typography } from "@mui/material";
 
 const PostWidget = ({
     postId,
@@ -21,10 +22,11 @@ const PostWidget = ({
     comments,
     createdAt
 }) => {
-    const [isComments, setIsComments] = useState(false);
     const dispatch = useDispatch();
+    const [isComments, setIsComments] = useState(false);
     const token = useSelector((state) => state.token);
     const currentUserId = useSelector((state) => state.user._id);
+    
     const isLiked = Boolean(likes[currentUserId])
     const likeCount = Object.keys(likes).length;
 
@@ -34,17 +36,9 @@ const PostWidget = ({
     const lightMedium = palette.neutral.lightMedium;
 
 
-    const patchLike = async () => {
-        const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-            method: "PATCH",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ userId: currentUserId })
-        });
-        const updatedPost = await res.json();
-        dispatch(setPost({ post: updatedPost }));
+    const handleLike = async () => {
+        const updatedPostRes = await patchLike({ token, currentUserId, postId });
+        dispatch(setPost({ post: updatedPostRes }));
     }
 
     return (
@@ -56,7 +50,7 @@ const PostWidget = ({
                 userPicturePath={userPicturePath}
             />
             <Typography color={main} sx={{ mt: "1rem" }} >{description}</Typography>
-            <Typography color={main} sx={{ mt: "0.5rem",fontSize:"0.9rem", color: lightMedium }}>
+            <Typography color={main} sx={{ mt: "0.5rem", fontSize: "0.9rem", color: lightMedium }}>
                 <IntlProvider defaultLocale="en" locale="en">
                     {((Date.now() / 1000) - (new Date(createdAt) / 1000)) > 86400 ?
                         <FormattedDate
@@ -81,14 +75,14 @@ const PostWidget = ({
                         height="auto"
                         alt="post"
                         style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-                        src={`http://localhost:3001/assets/${picturePath}`}
+                        src={`${service.baseURL}/assets/${picturePath}`}
                     /> : null
             }
             <FlexBetween mt="0.25rem">
                 <FlexBetween gap="1rem">
 
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={patchLike}>
+                        <IconButton onClick={handleLike}>
                             {isLiked ? <FavoriteOutlined sx={{ color: primary }} /> : <FavoriteBorderOutlined />}
                         </IconButton>
                         <Typography>{likeCount}</Typography>

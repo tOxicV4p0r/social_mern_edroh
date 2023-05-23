@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "state";
+import { setPosts } from "store";
+import { postPost } from "services/api";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
@@ -13,10 +14,11 @@ const MypostWidget = () => {
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
     const [post, setPost] = useState("");
-    const { palette } = useTheme();
     const { _id, picturePath } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
+    
+    const { palette } = useTheme();
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
     const lightMedium = palette.neutral.lightMedium;
@@ -31,14 +33,8 @@ const MypostWidget = () => {
             formData.append("picturePath", image.name);
         }
 
-        const res = await fetch('http://localhost:3001/posts', {
-            method: "POST",
-            headers: { Authorization: `Bearer ${token}` },
-            body: formData,
-        })
-
-        const posts = await res.json();
-        dispatch(setPosts({ posts }));
+        const postRes = await postPost({ token, formData });
+        dispatch(setPosts({ posts: postRes }));
         setImage(null);
         setPost("");
     }
@@ -146,8 +142,9 @@ const MypostWidget = () => {
                     disabled={!post}
                     onClick={handlePost}
                     sx={{
-                        color: palette.background.alt,
-                        backgroundColor: palette.primary.main,
+                        fontWeight: "600",
+                        color: palette.background.altMid,
+                        backgroundColor: palette.primary.light,
                         borderRadius: "3rem",
                     }}
                 >

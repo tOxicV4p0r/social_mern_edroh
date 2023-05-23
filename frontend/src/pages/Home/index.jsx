@@ -1,17 +1,18 @@
-import { Box, useMediaQuery } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setProfile } from "state";
+import { useDispatch, useSelector } from "react-redux";
+import { setProfile } from "store";
 import UserWidget from "pages/Widgets/UserWidget";
 import MypostWidget from "pages/Widgets/MypostWidget";
 import PostsWidget from "pages/Widgets/PostsWidget";
 import AdWidget from "pages/Widgets/AdWidget";
 import FriendListWidget from "pages/Widgets/FriendListWidget";
+import { Box, useMediaQuery } from "@mui/material";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
     const user = useSelector((state) => state.user);
+    const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
+    
     const { _id, picturePath } = user;
 
     useEffect(() => {

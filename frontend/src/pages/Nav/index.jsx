@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import NavMenu from "components/NavMenu";
 import FlexBetween from "components/FlexBetween";
 import {
     Box,
@@ -15,11 +16,10 @@ import {
     Menu,
     Search
 } from "@mui/icons-material";
-import NavMenu from "components/NavMenu";
 
 const Nav = () => {
-    const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
     const navigate = useNavigate();
+    const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
     const user = useSelector((state) => state.user);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 

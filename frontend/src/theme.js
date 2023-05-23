@@ -3,6 +3,7 @@ export const colorTokens = {
         0: "#FFFFFF",
         10: "#F6F6F6",
         50: "#F0F0F0",
+        60: "#0000008a",
         100: "#E0E0E0",
         150: "#c2c2c2a1",
         200: "#C2C2C2",
@@ -16,16 +17,16 @@ export const colorTokens = {
         1000: "#000000",
     },
     primary: {
-        50: "#E6FBFF",
-        100: "#CCF7FE",
-        200: "#99EEFD",
-        300: "#66E6FC",
-        400: "#33DDFB",
-        500: "#00D5FA",
-        600: "#00A0BC",
-        700: "#006B7D",
-        800: "#00353F",
-        900: "#001519",
+        50: "#e1f6fe",
+        100: "#b2e7fc",
+        200: "#7ed7fb",
+        300: "#46c7f9",
+        400: "#00baf9",
+        500: "#00aef8",
+        600: "#00a0e9",
+        700: "#008dd5",
+        800: "#007cc2",
+        900: "#005ba0",
     },
 };
 
@@ -38,8 +39,10 @@ export const themeSettings = (mode) => {
         theme = {
             primary: {
                 dark: colorTokens.primary[200],
-                main: colorTokens.primary[500],
+                medium: colorTokens.primary[400],
+                main: colorTokens.primary[600],
                 light: colorTokens.primary[800],
+                lightest: colorTokens.primary[900],
             },
             neutral: {
                 dark: colorTokens.gray[100],
@@ -51,6 +54,7 @@ export const themeSettings = (mode) => {
             },
             background: {
                 default: colorTokens.gray[900],
+                altMid: colorTokens.gray[0],
                 alt: colorTokens.gray[800],
             }
         }
@@ -58,8 +62,10 @@ export const themeSettings = (mode) => {
         theme = {
             primary: {
                 dark: colorTokens.primary[700],
+                medium: colorTokens.primary[600],
                 main: colorTokens.primary[500],
-                light: colorTokens.primary[50],
+                light: colorTokens.primary[200],
+                lightest: colorTokens.primary[100],
             },
             neutral: {
                 dark: colorTokens.gray[700],
@@ -71,6 +77,7 @@ export const themeSettings = (mode) => {
             },
             background: {
                 default: colorTokens.gray[10],
+                altMid: colorTokens.gray[60],
                 alt: colorTokens.gray[0],
             }
         }

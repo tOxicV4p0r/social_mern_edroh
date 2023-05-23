@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { setFriends } from "state";
+import { useNavigate } from "react-router-dom";
+import { setFriends } from "store";
+import { patchFriend } from "services/api";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
@@ -16,22 +17,14 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
     const main = palette.primary.main;
-    const medium = palette.primary.medium;
+    const light = palette.primary.light;
 
     const isMe = friendId === _id;
     const isFriend = friends.find((friend) => friend._id === friendId);
 
-    const patchFriend = async () => {
-        const res = await fetch(`http://localhost:3001/user/${_id}/${friendId}`, {
-            method: "PATCH",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
-
-        const data = await res.json();
-        dispatch(setFriends({ friends: data }))
+    const handleFriend = async () => {
+        const friendsRes = await patchFriend({ token, _id, friendId });
+        dispatch(setFriends({ friends: friendsRes }))
     };
 
     return (
@@ -48,7 +41,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
                         fontWeight="500"
                         sx={{
                             "&:hover": {
-                                color: palette.primary.light,
+                                color: light,
                                 cursor: "pointer"
                             }
                         }}
@@ -56,7 +49,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
                         {name}
                     </Typography>
                     <Typography
-                        color={medium} fontSize="0.75rem"
+                        color={light} fontSize="0.75rem"
                     >
                         {subtitle}
                     </Typography>
@@ -64,7 +57,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             </FlexBetween>
             {!isMe ?
                 <IconButton
-                    onClick={() => patchFriend()}
+                    onClick={handleFriend}
                     sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
                 >
                     {isFriend ? <PersonRemoveOutlined /> : <PersonAddOutlined />}

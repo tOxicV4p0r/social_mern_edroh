@@ -1,27 +1,18 @@
-import { PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, Typography, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setFriends } from "state";
+import { Box, Typography, useTheme } from "@mui/material";
 
-const FriendListWidget = ({ userId }) => {
-    const dispatch = useDispatch();
-    const token = useSelector((state) => state.token);
-    const user = useSelector((state) => state.user);
+const FriendListWidget = () => {
     const friends = useSelector((state) => state.user.friends);
-
+    
     const { palette } = useTheme();
-    const primaryLight = palette.primary.light;
-    const primaryDark = palette.primary.dark;
-    const main = palette.primary.main;
-    const medium = palette.primary.medium;
+    const dark = palette.neutral.dark;
 
     return (
         <WidgetWrapper>
             <Typography
-                color={palette.neutral.dark}
+                color={dark}
                 variant="h6"
                 fontWeight="500"
                 sx={{ mb: "1.5rem" }}

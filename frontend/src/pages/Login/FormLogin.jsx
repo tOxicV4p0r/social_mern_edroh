@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLogin } from "state";
+import { setLogin } from "store";
+import { authLogin, signUp } from "services/api";
 import { Formik } from "formik";
 import * as yup from "yup";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import {
     Alert,
     Box,
@@ -16,7 +18,6 @@ import {
     useMediaQuery,
     useTheme
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
@@ -49,28 +50,21 @@ const initialValuesLogin = {
 }
 
 const FormLogin = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [pageType, setPageType] = useState("login");
     const [openAlert, setOpenAlert] = useState();
     const [msgAlert, setMsgAlert] = useState("");
     const { palette } = useTheme();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
     const login = async (values, event) => {
-        const loggedInResponse = await fetch(
-            "http://localhost:3001/auth/login",
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(values)
-            }
-        );
-        const loggedIn = await loggedInResponse.json();
-        if (loggedIn) {
-            const { user, token } = loggedIn;
+        const loggedInRes = await authLogin(values);
+        if (loggedInRes) {
+            const { user, token } = loggedInRes;
             if (token) {
                 event.resetForm();
                 dispatch(
@@ -79,7 +73,7 @@ const FormLogin = () => {
 
                 navigate("/home");
             } else {
-                const { msg } = loggedIn;
+                const { msg } = loggedInRes;
                 setMsgAlert(msg);
                 setOpenAlert(true);
             }
@@ -93,12 +87,10 @@ const FormLogin = () => {
         }
 
         formData.append('picturePath', values.picture.name);
-
-        const savedUserResponse = await fetch("http://localhost:3001/auth/register", { method: "POST", body: formData });
-        const savedUser = await savedUserResponse.json();
+        const savedUserRes = await signUp({ formData });
         event.resetForm();
 
-        if (savedUser) {
+        if (savedUserRes) {
             setPageType("login");
         }
     }

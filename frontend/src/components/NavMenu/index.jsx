@@ -1,7 +1,7 @@
+import { useDispatch } from "react-redux";
+import { setLogout, setMode } from "store";
 import { DarkMode, Help, LightMode, Message, Notifications } from "@mui/icons-material";
 import { FormControl, IconButton, MenuItem, Select, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { setLogout, setMode } from "state";
 
 const NavMenu = ({ fullName, theme, neutralLight, dark }) => {
     const dispatch = useDispatch();
