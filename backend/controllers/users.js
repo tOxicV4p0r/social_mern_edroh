@@ -1,10 +1,10 @@
 import User from "../models/User.js";
 
 export const getUser = async (req, res) => {
+    console.log('getUser')    
     try {
         const { id } = req.params;
         const user = await User.findById(id);
-
         const friends = await Promise.all(
             user.friends.map((id) => User.findById(id))
         )

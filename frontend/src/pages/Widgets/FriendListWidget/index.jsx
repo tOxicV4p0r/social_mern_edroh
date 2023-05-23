@@ -11,15 +11,12 @@ const FriendListWidget = ({ userId }) => {
     const token = useSelector((state) => state.token);
     const user = useSelector((state) => state.user);
     const friends = useSelector((state) => state.user.friends);
-    // const profileFriends = useSelector((state) => state.profile.friends);
 
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
     const primaryDark = palette.primary.dark;
     const main = palette.primary.main;
     const medium = palette.primary.medium;
-
-    // const friends = user._id === userId ? currentUserfriends : profileFriends;
 
     return (
         <WidgetWrapper>
@@ -33,7 +30,6 @@ const FriendListWidget = ({ userId }) => {
             </Typography>
             <Box display="flex" flexDirection="column" gap="1.5rem">
                 {
-                    //friends.map((friends) => no destructure
                     friends.map(({ _id, firstName, lastName, location, picturePath }) => (
                         <Friend
                             key={_id}

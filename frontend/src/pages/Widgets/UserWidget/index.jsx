@@ -37,7 +37,7 @@ const UserWidget = ({ userId, picturePath }) => {
                     <UserImage image={picturePath} />
                     <Box>
                         <Typography
-                            variant="h5"
+                            variant="h6"
                             color={dark}
                             fontWeight="500"
                             sx={{

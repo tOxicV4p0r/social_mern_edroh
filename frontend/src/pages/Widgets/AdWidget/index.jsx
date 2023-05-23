@@ -1,4 +1,4 @@
-import { Typography, useTheme } from "@mui/material";
+import { Link, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 
@@ -26,7 +26,7 @@ const AdWidget = () => {
 
             <FlexBetween>
                 <Typography color={main} >Visit me</Typography>
-                <Typography color={medium} >Blackboy96.xzy</Typography>
+                <Typography color={medium} ><Link href="https://blackboy96.xyz" underline="hover" rel="noreferrer" target="_blank">Blackboy96.xyz</Link></Typography>
             </FlexBetween>
             <Typography color={medium} m="0.5rem 0">
                 Anyone who stops lerning is old, whether at twenty or eighty.

@@ -29,7 +29,7 @@ const Login = () => {
                 borderRadius="1.5rem"
                 backgroundColor={theme.palette.background.alt}
             >
-                <Typography>
+                <Typography mb="1rem">
                     Welcome to SocialPedia, the social media for Socialism
                 </Typography>
                 <FormLogin />
