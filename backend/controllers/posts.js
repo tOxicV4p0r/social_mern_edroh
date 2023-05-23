@@ -54,6 +54,9 @@ export const likePost = async (req, res) => {
         const { id } = req.params;
         const { userId } = req.body;
         const post = await Post.findById(id);
+        console.log(req.params)
+        console.log(req.body)
+        console.log(post)
         const isLiked = post.likes.get(userId);
 
         if (isLiked) {

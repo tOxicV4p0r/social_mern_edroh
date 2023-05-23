@@ -26,7 +26,7 @@ const PostWidget = ({
     const [isComments, setIsComments] = useState(false);
     const token = useSelector((state) => state.token);
     const currentUserId = useSelector((state) => state.user._id);
-    
+
     const isLiked = Boolean(likes[currentUserId])
     const likeCount = Object.keys(likes).length;
 
@@ -37,7 +37,7 @@ const PostWidget = ({
 
 
     const handleLike = async () => {
-        const updatedPostRes = await patchLike({ token, currentUserId, postId });
+        const updatedPostRes = await patchLike({ token, userId: currentUserId, postId });
         dispatch(setPost({ post: updatedPostRes }));
     }
 

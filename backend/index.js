@@ -33,12 +33,14 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
+// app.use("/assets", express.static(path.join(__dirname, 'build/assets')));
+const buildPath = path.join(__dirname, 'build')
+app.use(express.static(buildPath));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/assets");
+        cb(null, "build/assets");
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -55,7 +57,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/posts", postRoutes);
-
+app.get('*', function (req, res) { res.redirect('/'); });
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;

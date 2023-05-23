@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route, Navigate } from 'react-router-dom';
 import { themeSettings } from 'theme';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
@@ -17,7 +17,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<ProtectedLayout><Nav /></ProtectedLayout>} errorElement={<ErrorPage />} >
+        <Route path="/" element={<ProtectedLayout><Nav /></ProtectedLayout>} errorElement={<Navigate to="/" />} >
           <Route index={true} element={<ProtectedLayout><Home /></ProtectedLayout>} />
           <Route path="/home" element={<ProtectedLayout><Home /></ProtectedLayout>} />
           <Route path="/profile/:userId" element={<ProtectedLayout><Profile /></ProtectedLayout>} />

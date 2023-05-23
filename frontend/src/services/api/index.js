@@ -1,5 +1,5 @@
 export const service = {
-    baseURL: "http://localhost:3001"
+    baseURL: ""
 };
 
 export const signUp = async ({ formData }) => {
