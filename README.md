@@ -25,7 +25,7 @@ Then add your MongoDB credentials. You can edit some configurations here.
 
 Import the dummy data from data folder into MongoDB
 
-    /backend/data/
+    /backend/data/ --> posts.json, users.json
 
 Start the server with
 
