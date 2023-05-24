@@ -24,6 +24,7 @@ Then add your MongoDB credentials. You can edit some configurations here.
     MONGO_URL="mongodb+srv://<your_mongoDB_url>"
 
 Import the dummy data from data folder into MongoDB
+
     /backend/data/
 
 Start the server with
