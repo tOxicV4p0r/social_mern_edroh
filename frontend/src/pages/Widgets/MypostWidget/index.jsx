@@ -36,11 +36,14 @@ const MypostWidget = () => {
             formData.append("picturePath", image.name);
         }
 
+        // delay with aPromise to show the loading spinner work
+        await new Promise(resolve => setTimeout(() => resolve(), 1000))
         const postRes = await postPost({ token, formData });
         dispatch(setPosts({ posts: postRes }));
         setImage(null);
         setPost("");
         setIsLoading(false);
+        setIsImage(false);
     }
 
     return (
