@@ -12,12 +12,12 @@ const Home = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
-    
+
     const { _id, picturePath } = user;
 
     useEffect(() => {
         dispatch(setProfile({ profile: user }));
-    }, [])
+    }, []); // eslint-disable-line
 
     return (
         <Box

@@ -26,7 +26,7 @@ const UserWidget = ({ userId, picturePath }) => {
         viewedProfile,
         impressions,
         friends = []
-    } = user._id == profile._id ? user : profile;;
+    } = user._id === profile._id ? user : profile;
 
     return (
         <WidgetWrapper>

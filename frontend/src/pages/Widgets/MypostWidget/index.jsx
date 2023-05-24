@@ -6,7 +6,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import Dropzone from "react-dropzone";
-import { Box, Button, Divider, IconButton, InputBase, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, InputBase, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { AttachFileOutlined, DeleteOutlined, EditOutlined, GifBoxOutlined, ImageOutlined, MicOutlined, MoreHorizOutlined } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 

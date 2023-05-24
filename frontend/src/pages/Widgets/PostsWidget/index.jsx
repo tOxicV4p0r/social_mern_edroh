@@ -25,7 +25,7 @@ const PostsWidget = ({ userId, isProfile }) => {
         } else {
             getAllPosts();
         }
-    }, [userId]);
+    }, [userId]); // eslint-disable-line
 
     return (
         <>

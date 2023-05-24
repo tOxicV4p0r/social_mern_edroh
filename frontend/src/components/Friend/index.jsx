@@ -6,7 +6,7 @@ import { patchFriend } from "services/api";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
@@ -20,7 +20,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const { palette } = useTheme();
     const main = palette.primary.main;
     const light = palette.primary.light;
-    const medium = palette.neutral.light;
 
     const isMe = friendId === _id;
     const isFriend = friends.find((friend) => friend._id === friendId);
