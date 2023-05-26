@@ -52,14 +52,12 @@ const initialValuesLogin = {
 const FormLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [pageType, setPageType] = useState("login");
+    const [isLogin, setIsLogin] = useState("login");
     const [openAlert, setOpenAlert] = useState();
     const [msgAlert, setMsgAlert] = useState("");
     const { palette } = useTheme();
-    
+
     const isNonMobile = useMediaQuery("(min-width: 600px)");
-    const isLogin = pageType === "login";
-    const isRegister = pageType === "register";
 
     const login = async (values, event) => {
         const loggedInRes = await authLogin(values);
@@ -91,7 +89,7 @@ const FormLogin = () => {
         event.resetForm();
 
         if (savedUserRes) {
-            setPageType("login");
+            setIsLogin(true);
         }
     }
 
@@ -100,9 +98,9 @@ const FormLogin = () => {
     }
 
     const handleFormSubmit = async (values, event) => {
-        if (isLogin) return await login(values, event);
-
-        if (isRegister) return await register(values, event);
+        if (isLogin)
+            return await login(values, event);
+        return await register(values, event);
     }
 
     return (
@@ -142,7 +140,7 @@ const FormLogin = () => {
                                     }}
                                 >
                                     {
-                                        isRegister ? (
+                                        !isLogin ? (
                                             <>
                                                 <TextField
                                                     label="First Name"
@@ -191,7 +189,7 @@ const FormLogin = () => {
                                                     p="1rem"
                                                 >
                                                     <Dropzone
-                                                        acceptedFiles=".jpg,.jpeg,.png"
+                                                        accept={{ 'image/jpeg': ['.jpg', '.jpeg', '.png'] }}
                                                         multiple={false}
                                                         onDrop={(acceptedFiles) => setFieldValue("picture", acceptedFiles[0])}
                                                     >
@@ -272,7 +270,7 @@ const FormLogin = () => {
                                         </FlexBetween>
                                         <Typography
                                             onClick={() => {
-                                                setPageType(isLogin ? "register" : "login");
+                                                setIsLogin(!isLogin);
                                                 resetForm();
                                             }}
                                             sx={{

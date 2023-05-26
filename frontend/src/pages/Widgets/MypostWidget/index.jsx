@@ -71,7 +71,7 @@ const MypostWidget = () => {
                         p="1rem"
                     >
                         <Dropzone
-                            acceptedFiles=".jpg,.jpeg,.png"
+                            accept={{ 'image/jpeg': ['.jpg', '.jpeg', '.png'] }}
                             multiple={false}
                             onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
                         >
