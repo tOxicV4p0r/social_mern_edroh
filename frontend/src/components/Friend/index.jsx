@@ -27,7 +27,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const handleFriend = async () => {
         setLoading(true);
         // delay with aPromise to show the loading spinner work
-        await new Promise(resolve => setTimeout(() => resolve(), 1000))
+        // await new Promise(resolve => setTimeout(() => resolve(), 1000))
         const friendsRes = await patchFriend({ token, userId: _id, friendId });
         dispatch(setFriends({ friends: friendsRes }))
         setLoading(false);
