@@ -30,7 +30,7 @@ const NavMenu = ({ fullName, theme, neutralLight, dark }) => {
                         borderRadius: "0.25rem",
                         p: "0.25rem 1rem",
                         "& .MuiSvgIcon-root": {
-                            pr: "0.25.rem",
+                            pr: "0.25rem",
                             width: "3rem"
                         },
                         "& .MuiSelect-select:focus": {
