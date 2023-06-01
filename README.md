@@ -9,7 +9,7 @@ This demo project is based on EdRoh's tutorial video on Youtube. I have fixed so
 
 From this codebase, I have created a detailed tutorial in **Thai** language. You can watch it from the following link.
 
-> [Tutorial](https://youtu.be/BdgSbmS4_qg)
+[Tutorial](https://youtu.be/BdgSbmS4_qg)
 
 ---
 # How to install
